@@ -49,3 +49,23 @@ remove_files  D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/Bar_RAM.v
 file delete -force D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/Bar_RAM.v
 update_compile_order -fileset sources_1
 update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/Block_RAM.v] -no_script -reset -force -quiet
+remove_files  D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/Block_RAM.v
+add_files -norecurse {D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/RAMcell.v D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/Decoder.v}
+WARNING: [filemgmt 56-12] File 'D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/Decoder.v' cannot be added to the project because it already exists in the project, skipping this file
+update_compile_order -fileset sources_1
+close [ open D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/Score.v w ]
+add_files D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/Score.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+close [ open D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/BarCounter.v w ]
+add_files D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/BarCounter.v
+update_compile_order -fileset sources_1
+close [ open D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/BlockProcess.v w ]
+add_files D:/Desktop/github/DSD/Final_Project.srcs/sources_1/new/BlockProcess.v
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Wed Jun 17 18:40:06 2020...
