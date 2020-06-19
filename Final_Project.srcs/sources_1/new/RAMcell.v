@@ -1,5 +1,6 @@
 `timescale 1ns / 1ps
 
+// active low
 module SRlatch(
     input S,
     input R,
@@ -10,30 +11,41 @@ module SRlatch(
     assign _Q = ~(Q & R);
 endmodule
 
+// active high
 module Dlatch(
     input D,
-    input E,
+    input EN,
     output Q,
     output _Q
     );
-    SRlatch sr(~(D & E), ~(~D & E), Q, _Q); 
+    SRlatch sr(~(D & EN), ~(~D & EN), Q, _Q); 
+endmodule
+
+module DFF(
+    input D,
+    input CLK,
+    output reg Q
+    );
+    always @(posedge CLK) begin
+        Q=D;
+    end 
 endmodule
 
 module tristate_buffer(
     input in,
-    input E,
+    input EN,
     output out
     );
-	assign out = E ? in : 1'bz;	
+	assign out = EN ? in : 1'bz;	
 endmodule
 
 module RAMcell(
     input DATA,
+    input CLK,
     input WR,
     input CS,
     output OUT
     );
-    reg temp[0:1];
-    Dlatch d(DATA, WR & CS, temp[0], temp[1]);
-    tristate_buffer bf(temp[0], CS, OUT);
+    DFF d(DATA, WR & CLK, T1);
+    tristate_buffer bf(T1, CS, OUT);
 endmodule
