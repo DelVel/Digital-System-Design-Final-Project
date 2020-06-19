@@ -39,9 +39,9 @@ module BCD_Adder(
     assign Cout = _Cout | (_S[1] & _S[3]) | (_S[2] & _S[3]);
 
     assign _Cin[0] = 0;
-    assign _Cin[0] = Cout;
-    assign _Cin[0] = Cout;
-    assign _Cin[0] = 0;
+    assign _Cin[1] = Cout;
+    assign _Cin[2] = Cout;
+    assign _Cin[3] = 0;
 
     reg temp;
     Adder add2(_S, _Cin, 0, S, temp);
@@ -54,7 +54,8 @@ module Segmentation(
     assign OUT[0] = (IN[1] & IN[3]) | (~IN[1] & ~IN[3]) | IN[0] | IN[3];
     assign OUT[1] = (IN[2] & IN[3]) | (~IN[2] & ~IN[3]) | ~IN[1];
     assign OUT[2] = IN[1] | ~IN[2] | IN[3];
-    assign OUT[3] = (IN[2] & ~IN[3]) | (~IN[1] & ~IN[3]) | (~IN[1] & IN[2]) | (IN[1] & ~IN[2] & IN[3]) | IN[0];
+    assign OUT[3] = (IN[2] & ~IN[3]) | (~IN[1] & ~IN[3]) | (~IN[1] & IN[2]) |
+    (IN[1] & ~IN[2] & IN[3]) | IN[0];
     assign OUT[4] = (IN[2] & IN[3]) | (~IN[1] & ~IN[3]);
     assign OUT[5] = (IN[1] & ~IN[3]) | (~IN[1] & ~IN[3]) | (IN[1] & ~IN[2]) | IN[0];
     assign OUT[6] = (IN[2] & ~IN[3]) | (IN[2] & ~IN[2]) | IN[0] | (~IN[1] & IN[2]);
