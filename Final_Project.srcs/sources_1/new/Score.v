@@ -19,11 +19,11 @@ module Adder(
     output[3:0] S,
     output Cout
     );
-    wire[3:0] cout;    
-    FA fa0(A[0], B[0], Cin, S[0], cout[0]);  
-    FA fa1(A[1], B[1], cout[0], S[1], cout[1]);  
-    FA fa2(A[2], B[2], cout[1], S[2], cout[2]);  
-    FA fa3(A[3], B[3], cout[2], S[3], cout[3]);  
+    wire[3:0] cout;
+    FA fa0(A[0], B[0], Cin, S[0], cout[0]);
+    FA fa1(A[1], B[1], cout[0], S[1], cout[1]);
+    FA fa2(A[2], B[2], cout[1], S[2], cout[2]);
+    FA fa3(A[3], B[3], cout[2], S[3], cout[3]);
 endmodule
 
 module BCD_Adder(
@@ -37,14 +37,14 @@ module BCD_Adder(
     wire _Cout;
     Adder add1(A, B, Cin, _S, _Cout);
     assign Cout = _Cout | (_S[1] & _S[3]) | (_S[2] & _S[3]);
-    
-    assign _Cin[0] = 0;  
-    assign _Cin[0] = Cout;  
-    assign _Cin[0] = Cout;  
+
     assign _Cin[0] = 0;
-    
+    assign _Cin[0] = Cout;
+    assign _Cin[0] = Cout;
+    assign _Cin[0] = 0;
+
     reg temp;
-    Adder add2(_S, _Cin, 0, S, temp);  
+    Adder add2(_S, _Cin, 0, S, temp);
 endmodule
 
 module Segmentation(
@@ -72,10 +72,10 @@ module Score(
     assign sum[5] = 0;
     assign sum[6] = 0;
     assign sum[7] = 0;
-    
+
     wire[23:0] memo;
     RAM Rram(0, 0, 1, 4'b1111, memo);
-    
+
     wire[23:0] score;
     wire[5:0] cout;
     BCD_Adder bcd0(memo[3:0], sum[3:0], 0, score[3:0], cout[0]);
@@ -84,7 +84,7 @@ module Score(
     BCD_Adder bcd3(memo[15:12], 0, cout[2], score[15:12], cout[3]);
     BCD_Adder bcd4(memo[19:16], 0, cout[3], score[19:16], cout[4]);
     BCD_Adder bcd5(memo[23:20], 0, cout[4], score[23:20], cout[5]);
-    
+
     wire[23:0] temp;
-    RAM Wram(score, 1, 1, 4'b1111, temp); 
+    RAM Wram(score, 1, 1, 4'b1111, temp);
 endmodule

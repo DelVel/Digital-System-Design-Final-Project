@@ -54,4 +54,4 @@ module RAM_WORD(
     RAM_BIT R1(DAT[23:16],CLK,WR,CS,OUT[23:16]);
     RAM_BIT R2(DAT[15:8],CLK,WR,CS,OUT[15:8]);
     RAM_BIT R3(DAT[7:0],CLK,WR,CS,OUT[7:0]);
-endmodule //RAM_WORD 
+endmodule //RAM_WORD
