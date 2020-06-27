@@ -13,10 +13,10 @@ module main(
     output dp,
     output [3:0] an
 );
-    reg [23:0] RAM_DATA_IN;                 //data input
+    wire [23:0] RAM_DATA_IN;                 //data input
     wire [23:0] RAM_DATA_OUT;               //data output
-    reg WR;                                 //read-write mode
-    reg [3:0] RAM_ADDR;                     //RAM address
+    wire WR;                                 //read-write mode
+    wire [3:0] RAM_ADDR;                     //RAM address
 
     RAM ram(                                //RAM module
         .DATA(RAM_DATA_IN),
