@@ -1,15 +1,17 @@
 `timescale 1ns / 1ps
 
 module sim_tb();
-    reg[3:0] in;
-    wire [6:0] out;
+    reg [7:0]a,b;
+    Comparator_WORD C(a,b,1'b1, res1,res2,res3);
 
-    BCD_7SEG_CONV conv(in,out);
-    integer i;
+    integer c,d;
     initial begin
-        for (i = 0; i<10; i=i+1) begin
-            in=i;
-            #1;
+       for (c = 0; c<256; c=c+1) begin
+            for (d = 0; d<256; d=d+1) begin
+                a=c;
+                b=d;
+                #100;
+            end
         end
         $finish;
     end

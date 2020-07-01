@@ -5,6 +5,9 @@ module DFF(
     input CLK,
     output reg Q
     );
+    initial begin
+        Q = 0;
+    end
     always @(posedge CLK) begin
         Q = D;
     end

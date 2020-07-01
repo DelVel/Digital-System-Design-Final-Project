@@ -3,21 +3,17 @@
 module main(
     // clock input
     input clk,
-
     //button input
     input btnL,
     input btnR,
-
     //led segment output
-    output [6:0] seg,
-    output dp,
+    output [0:7] seg,
     output [3:0] an
 );
-    wire [23:0] RAM_DATA_IN;                 //data input
-    wire [23:0] RAM_DATA_OUT;               //data output
+    wire [7:0] RAM_DATA_IN;                 //data input
+    wire [7:0] RAM_DATA_OUT;               //data output
     wire WR;                                 //read-write mode
     wire [3:0] RAM_ADDR;                     //RAM address
-
     RAM ram(                                //RAM module
         .DATA(RAM_DATA_IN),
         .CLK(clk),

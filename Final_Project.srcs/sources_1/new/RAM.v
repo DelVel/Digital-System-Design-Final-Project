@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
 module RAM(
-    input[23:0] DATA,
+    input[7:0] DATA,
     input CLK,
     input WR,
     input[3:0] ADDR,
-    output[23:0] OUT
+    output[7:0] OUT
     );
     wire [15:0]temp;
-    Decoder decoder(ADDR, temp);
+    Decoder_4_16 decoder(ADDR, temp);
     RAM_WORD WORD1(DATA,CLK,WR,temp[0],OUT);
     RAM_WORD WORD2(DATA,CLK,WR,temp[1],OUT);
     RAM_WORD WORD3(DATA,CLK,WR,temp[2],OUT);
@@ -27,7 +27,7 @@ module RAM(
     RAM_WORD WORD16(DATA,CLK,WR,temp[15],OUT);
 endmodule
 
-module RAM_BIT(
+module RAM_WORD(
     input [7:0]DAT,
     input CLK,
     input WR,
@@ -42,16 +42,4 @@ module RAM_BIT(
     RAMcell R6(DAT[5],CLK,WR,CS,OUT[5]);
     RAMcell R7(DAT[6],CLK,WR,CS,OUT[6]);
     RAMcell R8(DAT[7],CLK,WR,CS,OUT[7]);
-endmodule // RAM_BIT
-
-module RAM_WORD(
-    input [23:0]DAT,
-    input CLK,
-    input WR,
-    input CS,
-    output [23:0]OUT
-    );
-    RAM_BIT R1(DAT[23:16],CLK,WR,CS,OUT[23:16]);
-    RAM_BIT R2(DAT[15:8],CLK,WR,CS,OUT[15:8]);
-    RAM_BIT R3(DAT[7:0],CLK,WR,CS,OUT[7:0]);
-endmodule //RAM_WORD
+endmodule // RAM_WORD
