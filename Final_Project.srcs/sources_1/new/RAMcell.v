@@ -3,13 +3,19 @@
 module DFF(
     input D,
     input CLK,
+    input reset,
     output reg Q
     );
     initial begin
-        Q = 0;
+        Q <= 0;
     end
-    always @(posedge CLK) begin
-        Q = D;
+    
+    // if reset == Low -> reset to 0
+    always @(posedge CLK or negedge reset) begin
+        if (reset == 0)
+            Q <= 0;
+        else
+            Q <= D;
     end
 endmodule
 
@@ -28,6 +34,6 @@ module RAMcell(
     input CS,
     output OUT
     );
-    DFF d(DATA, WR & CLK, T1);
+    DFF d(DATA, WR & CLK, 1, T1);
     TRI_BUF bf(T1, CS, OUT);
 endmodule
