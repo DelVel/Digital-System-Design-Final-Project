@@ -6,6 +6,7 @@ module main(
     //button input
     input btnL,
     input btnR,
+    input btnC,
     //led segment output
     output [0:7] seg,
     output [3:0] an
@@ -21,5 +22,8 @@ module main(
         .ADDR(RAM_ADDR),
         .OUT(RAM_DATA_OUT)
     );
-
+    Score score(
+        clk, increment, reset,
+        seg, an
+    );
 endmodule // main

@@ -5,8 +5,6 @@ module BarCounter(
     output[23:0] OUT
     );
     wire[23:0] bar;
-    RAM Rram(0, 0, 1, 4'b1110, bar);
-
     wire[23:0] temp1, temp2;
     assign temp1 = bar >> 1;
     assign temp2 = bar << 1;

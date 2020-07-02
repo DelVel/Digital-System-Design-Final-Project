@@ -5,7 +5,7 @@ module ClockReducer_1_2(
     output res
     );
     DFF D1(~res, ~clk, res);
-endmodule
+endmodule // ClockReducer_1_2
 
 module ClockReducer_1_4(
     input clk,
