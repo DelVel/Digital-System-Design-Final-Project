@@ -4,8 +4,26 @@ module ClockReducer_1_2(
     input clk,
     output res
     );
-    DFF D1(~res, ~clk, res);
+    DFF D1(~res, ~clk, 1'b0, res);
 endmodule // ClockReducer_1_2
+
+module ClockReducer_1_100(
+    input clk,
+    output reg res
+    );
+    reg [7:0]a;
+    initial begin
+        res = 0;
+        a = 0;
+    end
+    always @(posedge clk) begin
+        a <= a + 1;
+        if(a % 100 == 0) begin
+            res <= ~res;
+        end
+        if(a == 200) begin a <= 0; end
+    end
+endmodule //ClockReducer_1_100
 
 module ClockReducer_1_4(
     input clk,

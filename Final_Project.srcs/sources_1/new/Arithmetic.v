@@ -135,3 +135,49 @@ module Comparator_WORD(
     assign a_g = _Tag1 | _Tag2;
     assign b_g = _Tbg1 | _Tbg2;
 endmodule // Comparator_WORD
+
+module Bitwith_4_4x1_MUX(
+    input [3:0]a,b,c,d,
+    input [1:0]s,
+    output[3:0]r
+    );
+    Bitwith_1_4x1_MUX aaa(a[0],b[0],c[0],d[0],s,r[0]);
+    Bitwith_1_4x1_MUX aba(a[1],b[1],c[1],d[1],s,r[1]);
+    Bitwith_1_4x1_MUX aca(a[2],b[2],c[2],d[2],s,r[2]);
+    Bitwith_1_4x1_MUX ada(a[3],b[3],c[3],d[3],s,r[3]);
+endmodule // Bitwith_4_4x1_MUX
+
+module Bitwith_1_4x1_MUX(
+    input a,b,c,d,
+    input [1:0]s,
+    output r
+    );
+    assign r = ~s[0] & ~s[1] & a | s[0] & ~s[1] & b | ~s[0] & s[1] & c | s[0] & s[1] & d;
+endmodule // Bitwith_1_4x1_MUX
+
+module Bitwith_1_4x1_MUX_3_4_meld(
+    input a,b,c,
+    input [1:0]s,
+    output r
+    );
+    assign r = ~s[0] & ~s[1] & a | s[0] & ~s[1] & b | ~s[0] & s[1] & c | s[0] & s[1] & c;
+endmodule // Bitwith_1_4x1_MUX_3_4_meld
+
+module Bitwith_1_2x1_MUX (
+    input a,b,
+    input s,
+    output r
+);
+    assign r = a & ~s | b & s;
+endmodule // Bitwith_1_2x1_MUX
+
+module Bitwith_4_2x1_MUX (
+    input [3:0]a,b,
+    input s,
+    output [3:0] r
+);
+    Bitwith_1_2x1_MUX a(a[0],b[0],s,r[0]);
+    Bitwith_1_2x1_MUX b(a[1],b[1],s,r[1]);
+    Bitwith_1_2x1_MUX c(a[2],b[2],s,r[2]);
+    Bitwith_1_2x1_MUX d(a[3],b[3],s,r[3]);
+endmodule // Bitwith_4_2x1_MUX
