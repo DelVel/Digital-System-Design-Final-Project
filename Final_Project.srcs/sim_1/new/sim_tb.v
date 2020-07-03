@@ -1,18 +1,24 @@
 `timescale 1ns / 1ps
 
 module sim_tb();
-    reg clk;
+    reg clk,inc, res;
     wire [7:0] seg;
-    wire [3:0]an,out1,out2,out3,out4;
-    Score C(clk,1'b0, seg,an,out1,out2,out3,out4);
-
+    wire [3:0]an;
+    Score C(clk,inc,res, seg,an);
     integer c;
     initial begin
-        clk = 0;
-       for (c = 0; c<32000; c=c+1) begin
-            clk = ~clk;
-            #10;
-        end
-        $finish;
+        res <= 1;
+        #1;
+        res <= 0;
+        inc <= 1;
+        clk <= 0;
+    end
+    always begin
+        #10;
+        clk <= ~clk;
+    end
+    always begin
+        #15;
+        inc <= ~inc;
     end
 endmodule
