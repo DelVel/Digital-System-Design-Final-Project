@@ -2,17 +2,16 @@
 
 module BCD_Counter(
     input clk,
-    input reset,
     output [3:0]out
     );
-    DFF D1(~out[0]          , ~clk   , reset, out[0]);
-    DFF D2(~out[1] & ~out[3], ~out[0], reset, out[1]);
-    DFF D3(~out[2]          , ~out[1], reset, out[2]);
-    DFF D4(out[2] & out[1]  , ~out[0], reset, out[3]);
+    DFF D1(~out[0]          , ~clk   , out[0]);
+    DFF D2(~out[1] & ~out[3], ~out[0], out[1]);
+    DFF D3(~out[2]          , ~out[1], out[2]);
+    DFF D4(out[2] & out[1]  , ~out[0], out[3]);
 endmodule // BCD_Counter
 
 module Score(
-    input clk, increment, reset,
+    input clk, increment,
     output [7:0]seg,
     output reg [3:0]an
     );
@@ -21,10 +20,10 @@ module Score(
     wire [3:0] toConv;
     reg [1:0] sel;
 
-    BCD_Counter first   (increment, reset,  out1);
-    BCD_Counter second  (out1[3],   reset,  out2);
-    BCD_Counter third   (out2[3],   reset,  out3);
-    BCD_Counter fourth  (out3[3],   reset,  out4);
+    BCD_Counter first   (increment,  out1);
+    BCD_Counter second  (out1[3]  ,  out2);
+    BCD_Counter third   (out2[3]  ,  out3);
+    BCD_Counter fourth  (out3[3]  ,  out4);
 
     Bitwith_4_4x1_MUX mux(out1,out2,out3,out4,sel,toConv);
     BCD_7SEG_CONV converter(toConv, seg);
@@ -44,7 +43,7 @@ module Score(
         end
     end
     always @(posedge clk) begin
-        if(flicker_counter == 1048576) begin flicker_counter <= 1; end
+        if(flicker_counter == 10000000) begin flicker_counter <= 1; end
         else begin flicker_counter <= flicker_counter + 1; end
     end
 

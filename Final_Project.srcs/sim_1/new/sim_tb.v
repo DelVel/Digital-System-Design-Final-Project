@@ -1,24 +1,12 @@
 `timescale 1ns / 1ps
 
 module sim_tb();
-    reg clk,inc, res;
-    wire [7:0] seg;
-    wire [3:0]an;
-    Score C(clk,inc,res, seg,an);
-    integer c;
-    initial begin
-        res <= 1;
-        #1;
-        res <= 0;
-        inc <= 1;
-        clk <= 0;
-    end
-    always begin
-        #10;
-        clk <= ~clk;
-    end
-    always begin
-        #15;
-        inc <= ~inc;
-    end
+    wire[3:0]a;
+    wire[2:0]b;
+    assign a = 4'b0110;
+    assign b = 3'b010;
+    wire[95:0]c;
+    assign c = 96'b101010010101010101010010100101001010101001010101010010101001010100001010100101010100101001101010;
+    wire [95:0]temp;
+    assign temp = (1 << a + 12*b) | c;
 endmodule
