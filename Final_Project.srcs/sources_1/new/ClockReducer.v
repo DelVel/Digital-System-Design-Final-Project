@@ -21,7 +21,7 @@ module ClockReducer_1_100(
         if(a % 100 == 0) begin
             res <= ~res;
         end
-        if(a == 200) begin a <= 0; end
+        if(a == 201) begin a <= 1; end
     end
 endmodule //ClockReducer_1_100
 
